@@ -106,7 +106,7 @@ try{
                 <div class="form-group">
                   <label for="input_month">月份</label>
                   <input type="number" max="12" min="1" class="form-control" id="input_month" disable name="month"
-                    placeholder="Password" value="<%=monthnum%>">
+                    placeholder="Password" value="<%=monthnum%>" disabled>
                 </div>
               </div>
               <small id="alert" class="text-left text-danger">所設定之參數將於下次補貨後適用！</small>
@@ -135,12 +135,12 @@ try{
                       <h5 class="card-title">北蓋IV</h5>
                       <div class="form-group">
                         <label for="title">承租欄位數量</label>
-                        <input type="number" class="form-control" id="set_n_IV_Rent" name="N_IV_Rent" placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][1][0]%>">
+                        <input type="number" class="form-control" id="set_n_IV_Rent" name="N_IV_Rent" placeholder="數量" value="<%=arrayDB[1][1][0]%>">
                       </div>
                       <div class="form-group">
                         <label for="title">幾天補一次貨</label>
                         <input type="number" class="form-control" id="set_n_IV_Give" name="N_IV_Give"
-                          placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][1][1]%>">
+                          placeholder="數量"  value="<%=arrayDB[1][1][1]%>">
                       </div>
                       <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#Modal_N_IV">檢視上月營運</button>
@@ -154,12 +154,12 @@ try{
                       <div class="form-group">
                         <label for="title">承租欄位數量</label>
                         <input type="number" class="form-control" id="set_n_VV_Rent" name="N_VV_Rent"
-                          placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][2][0]%>">
+                          placeholder="數量"  value="<%=arrayDB[1][2][0]%>">
                       </div>
                       <div class="form-group">
                         <label for="title">幾天補一次貨</label>
                         <input type="number" class="form-control" id="set_n_VV_Give" name="N_VV_Give"
-                          placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][2][1]%>">
+                          placeholder="數量"  value="<%=arrayDB[1][2][1]%>">
                       </div>
                       <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#Modal_N_VV">檢視上月營運</button>
@@ -173,12 +173,12 @@ try{
                       <div class="form-group">
                         <label for="title">承租欄位數量</label>
                         <input type="number" class="form-control" id="set_n_CVV_Rent" name="N_CVV_Rent"
-                          placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][3][0]%>">
+                          placeholder="數量"  value="<%=arrayDB[1][3][0]%>">
                       </div>
                       <div class="form-group">
                         <label for="title">幾天補一次貨</label>
                         <input type="number" class="form-control" id="set_n_CVV_Give" name="N_CVV_Give"
-                          placeholder="數量" value="<%=arrayDB[1][1][0]%>" value="<%=arrayDB[1][3][1]%>">
+                          placeholder="數量" value="<%=arrayDB[1][3][1]%>">
                       </div>
                       <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#Modal_N_CVV">檢視上月營運</button>
@@ -343,9 +343,25 @@ try{
                 <%
                 monthnum--;
                 month = monthnum +"";
+			          
+                con.createStatement().execute("use consult");  
+                sql = "SELECT `date` from `comparedate` WHERE `month`='"+ monthnum +"'ORDER BY `date` DESC Limit 1" ;
+	  	          tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){ 
+                  srDate = tmp.getString("date");
+                  endDay = Integer.parseInt(srDate);
+                }
+                sql = "SELECT `date` from `comparedate` WHERE `month`='"+monthnum+"'ORDER BY `date` Limit 1" ;
+	  	          tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){ 
+                  srDate = tmp.getString("date");
+                  beginDay = Integer.parseInt(srDate);
+                }
+                con.createStatement().execute("use transaction");  
+                
                 indexProducer = 1;
                 indexProduct = 1;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -436,9 +452,25 @@ try{
                 </thead>
                 <tbody>
                   <%
+                
+                con.createStatement().execute("use consult");  
+                sql = "SELECT `date` from `comparedate` WHERE `month`='"+ monthnum +"'ORDER BY `date` DESC Limit 1" ;
+	  	          tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){ 
+                  srDate = tmp.getString("date");
+                  endDay = Integer.parseInt(srDate);
+                }
+                sql = "SELECT `date` from `comparedate` WHERE `month`='"+monthnum+"'ORDER BY `date` Limit 1" ;
+	  	          tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){ 
+                  srDate = tmp.getString("date");
+                  beginDay = Integer.parseInt(srDate);
+                }
+                con.createStatement().execute("use transaction");  
+
                 indexProducer = 1;
                 indexProduct = 2;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`,`restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -531,7 +563,7 @@ try{
                   <%
                 indexProducer = 1;
                 indexProduct = 3;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -625,7 +657,7 @@ try{
                   <%
                 indexProducer = 2;
                 indexProduct = 1;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -717,7 +749,7 @@ try{
                 <tbody>
                 <%indexProducer = 2;
                 indexProduct = 2;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -810,7 +842,7 @@ try{
                   <%
                 indexProducer = 2;
                 indexProduct = 3;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
                 tmp =  con.createStatement().executeQuery(sql);
 	  	          while(tmp.next()){  
                 %>
@@ -901,9 +933,22 @@ try{
                   </tr>
                 </thead>
                 <tbody>
+                  <%
                 indexProducer = 3;
                 indexProduct = 1;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
+                tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){  
+                %>
+                  <tr>
+                    <th scope="row"><%=tmp.getString("date")%></th>
+                    <td><%=tmp.getString("sellValue")%></td>
+                    <td><%=tmp.getString("restockValue")%></td>
+                    <td><%=tmp.getString("emergencyValue")%></td>
+                  </tr>
+                <%
+                }
+                %>
                 </tbody>
               </table>
             </div>
@@ -981,9 +1026,22 @@ try{
                   </tr>
                 </thead>
                 <tbody>
+                  <%
                 indexProducer = 3;
                 indexProduct = 2;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
+                tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){  
+                %>
+                  <tr>
+                    <th scope="row"><%=tmp.getString("date")%></th>
+                    <td><%=tmp.getString("sellValue")%></td>
+                    <td><%=tmp.getString("restockValue")%></td>
+                    <td><%=tmp.getString("emergencyValue")%></td>
+                  </tr>
+                <%
+                }
+                %>
                 </tbody>
               </table>
             </div>
@@ -1060,10 +1118,23 @@ try{
                     <th scope="col">緊急供貨軸數</th>
                   </tr>
                 </thead>
-                <tbody>
+                               <tbody>
+                  <%
                 indexProducer = 3;
                 indexProduct = 3;
-                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"'" ;
+                sql = "SELECT `date`, `sellValue`, `restockValue`, `emergencyValue` FROM `dayrunning` WHERE `idGameLogin` = '"+srGameId+"' AND `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `date` >= '"+beginDay+"' AND `date` <= '"+endDay+"'" ;
+                tmp =  con.createStatement().executeQuery(sql);
+	  	          while(tmp.next()){  
+                %>
+                  <tr>
+                    <th scope="row"><%=tmp.getString("date")%></th>
+                    <td><%=tmp.getString("sellValue")%></td>
+                    <td><%=tmp.getString("restockValue")%></td>
+                    <td><%=tmp.getString("emergencyValue")%></td>
+                  </tr>
+                <%
+                }
+                %>
                 </tbody>
               </table>
             </div>
@@ -1104,8 +1175,6 @@ try{
                   </tr>
                 <%
                 }
-                monthnum++;
-                month = monthnum + "";
                 %>
                 </tbody>
               </table>

@@ -93,7 +93,7 @@ try{
 			con.createStatement().execute("use transaction");  
             
 			//執行 SQL 指令        
-			sql = "SELECT `rentQuantity` FROM `monthparameter` WHERE `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `idGameLogin` = '"+srGameId+"' AND `month` = '"+month+"'" ;
+			sql = "SELECT `rentQuantity`,`idProducer`,`idProduct` FROM `monthparameter` WHERE  `idGameLogin` = '"+srGameId+"' AND `month` = '"+month+"'" ;
 	  	  	tmp =  con.createStatement().executeQuery(sql);
             while(tmp.next()){
                 indexProducer = tmp.getInt("idProducer");
@@ -172,7 +172,7 @@ try{
                     arrayDB[indexProducer][indexProduct][9] = "" + (numRam*emergencyPricePerOne);
                 }
             }
-
+            
 			con.createStatement().execute("use transaction");  
             for(indexProducer = 1;indexProducer < 4;indexProducer++){
                 for(indexProduct= 1 ;indexProduct <4; indexProduct++){
@@ -188,8 +188,12 @@ try{
                 }
             }
             reurl = "../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+(monthnum+1)+"&gameID="+ srGameId+"&times=1";
+            if(monthnum==12){
+                reurl = "../game_end.jsp?stu_id="+stu_id+"&name="+name+"&month="+(monthnum+1)+"&gameID="+ srGameId+"&times=1";
+            }
             response.setHeader ("refresh","0;URL="+reurl);
-			//關閉連線  
+			
+            //關閉連線  
 			con.close();
 		}
 	}        

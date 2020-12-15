@@ -35,12 +35,12 @@
 	}
   // 產生DB陣列
   String[][][] arrayDB;
-  arrayDB = new String[4][4][7]; // 產生陣列
+  arrayDB = new String[4][4][8]; // 產生陣列
   for(int i=0;i<4;i++){
     for(int j=0;j<4;j++){
-      arrayDB[i][j][0]=""; //承租數量
-      arrayDB[i][j][1]=""; //幾天補貨
-      arrayDB[i][j][2]=""; //當日銷售量
+      arrayDB[i][j][0]="0"; //承租數量
+      arrayDB[i][j][1]="0"; //幾天補貨
+      arrayDB[i][j][2]="0"; //當日銷售量
       arrayDB[i][j][3]="0"; //前一日庫存
       arrayDB[i][j][4]="0"; //當日庫存
       arrayDB[i][j][5]="0"; //當日緊急補貨
@@ -109,9 +109,6 @@
           ResultSet tmp2 =  con.createStatement().executeQuery(sql2);
 	  	  	con.createStatement().execute("use transaction");  
 
-          sql = "select `rentQuantity`,`restockDay`,`idProducer`,`idProduct` from `monthparameter` where `idGameLogin` = '"+ srGameId +"'AND `month`="+(monthnum-1) ;
-    			tmp =  con.createStatement().executeQuery(sql);
-
           int ram_SellValue = 0;
           int ram_Stock = 0;
           int ram_RestockDay = 0;
@@ -131,10 +128,27 @@
 	  	  	    while(tmp.next()){ 
                 arrayDB[indexProducer][indexProduct][3] = tmp.getString("dayInventory");
                 arrayDB[indexProducer][indexProduct][4] = arrayDB[indexProducer][indexProduct][3] ;
+              }
+              con.createStatement().execute("use transaction");  
+              sql2 = "SELECT `rentQuantity`, `restockDay` from `monthparameter` WHERE `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `month` = '"+(monthnum)+"' AND `idGameLogin` ='"+srGameId+"'" ;
+              tmp2 =  con.createStatement().executeQuery(sql2);
+              while(tmp2.next()){ 
+                ram_RestockDay = tmp2.getInt("restockDay");
+                
+                if((today%ram_RestockDay) == 0){ //補貨日
+                  arrayDB[indexProducer][indexProduct][6] = "" + (tmp2.getInt("rentQuantity") - Integer.parseInt(arrayDB[indexProducer][indexProduct][4]));
+                  arrayDB[indexProducer][indexProduct][4] = tmp2.getString("rentQuantity");
+                }
+                else{
+                  arrayDB[indexProducer][indexProduct][6] = "0";
+                }
+                
                 ram_SellValue = Integer.parseInt(arrayDB[indexProducer][indexProduct][2]);
                 ram_Stock = Integer.parseInt(arrayDB[indexProducer][indexProduct][4]);
-                if(ram_SellValue > ram_Stock){
-                  arrayDB[indexProducer][indexProduct][5] = "" + (ram_SellValue - ram_Stock) ;
+                
+                //判斷是否緊急補貨
+                if(ram_SellValue > ram_Stock){ 
+                  arrayDB[indexProducer][indexProduct][5] = "" + (ram_SellValue - ram_Stock) ; //緊急補貨
                   arrayDB[indexProducer][indexProduct][4] = "0";
                 }
                 else{
@@ -142,24 +156,9 @@
                   arrayDB[indexProducer][indexProduct][5] = "0";
                 }
                 
-              }
-              con.createStatement().execute("use transaction");  
-              sql2 = "SELECT `rentQuantity`, `restockDay` from `monthparameter` WHERE `idProducer` = '"+indexProducer+"' AND `idProduct` = '"+indexProduct+"' AND `month` = '"+(monthnum-1)+"' AND `idGameLogin` ='"+srGameId+"'" ;
-              tmp2 =  con.createStatement().executeQuery(sql2);
-              while(tmp2.next()){ 
-                ram_RestockDay = Integer.parseInt(tmp2.getString("restockDay"));
-                if(ram_RestockDay == 0){
-                  arrayDB[indexProducer][indexProduct][6] = "" + (Integer.parseInt(tmp2.getString("rentQuantity")) - Integer.parseInt(arrayDB[indexProducer][indexProduct][4]));
-                  arrayDB[indexProducer][indexProduct][4] = tmp2.getString("rentQuantity");
-                  arrayDB[indexProducer][indexProduct][1] = "" + (Integer.parseInt(tmp2.getString("restockDay"))-1);
-                }
-                else{
-                  arrayDB[indexProducer][indexProduct][6] = "0";
-                  arrayDB[indexProducer][indexProduct][1] = "" + (Integer.parseInt(tmp2.getString("restockDay"))-1);
-                }
                 
-                //Convert
               }
+              //寫入DB
               con.createStatement().execute("INSERT `dayrunning`(`idGameLogin`,`idProducer`,`idProduct`,`date`,`beginInventory`,`sellValue`,`dayInventory`,`restockValue`,`emergencyValue`) VALUE('"+srGameId+"','"+indexProducer+"','"+indexProduct+"','"+today+"','"+arrayDB[indexProducer][indexProduct][3]+"','"+arrayDB[indexProducer][indexProduct][2]+"','"+arrayDB[indexProducer][indexProduct][4]+"','"+arrayDB[indexProducer][indexProduct][6]+"','" + arrayDB[indexProducer][indexProduct][5] + "')");  
             }
           }

@@ -69,15 +69,12 @@
     	}        
     	catch (SQLException sExec) {
     		out.println("SQL錯誤"+sExec.toString());
-            %>
-                <script>window.history.go(-1)</script>
-            <%
+            response.setHeader ("refresh","5;URL=../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+monthnum+"&gameID="+ srGameId+"&times=1");
+            
     	}
     }
     catch (ClassNotFoundException err) {
     	out.println("class錯誤"+err.toString());
-        %>
-             <script>window.history.go(-1)</script>
-        <%
+        response.setHeader ("refresh","5;URL=../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+monthnum+"&gameID="+ srGameId+"&times=1");
     }
 %>

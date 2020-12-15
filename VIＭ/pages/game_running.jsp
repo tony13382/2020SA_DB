@@ -51,8 +51,8 @@
   arrayDBofShow = new int[4][4][2];
   for(int i=0;i<4;i++){
     for(int j=0;j<4;j++){
-      arrayDB[i][j][0]="0"; //補貨
-      arrayDB[i][j][1]="0"; //緊急補貨
+      arrayDBofShow[i][j][0]=0; //補貨
+      arrayDBofShow[i][j][1]=0; //緊急補貨
     }
   }
   
@@ -165,15 +165,14 @@
           }
           for(int i=1;i<4;i++){
             for(int j=1;j<4;j++){
-              arrayDB[i][j][0]=arrayDB[i][j][6]; 
-              arrayDB[i][j][1]=arrayDB[i][j][5];
+              arrayDBofShow[i][j][0]=Integer.parseInt(arrayDB[i][j][6]); 
+              arrayDBofShow[i][j][1]=Integer.parseInt(arrayDB[i][j][5]);
             }
           }
-          today++;
-
+          
           if(today == endDay){
             times = 1;
-            reurl = "app/count_month_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+(monthnum+1)+"&gameID="+ srGameId+"&times="+times;
+            reurl = "app/count_month_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+(monthnum)+"&gameID="+ srGameId+"&times="+times;  
             response.setHeader ("refresh","5;URL="+reurl);
           }
           else{
@@ -197,9 +196,8 @@
   }
   catch(Exception dbExec) {
     application.log("GerDBError");
-    %>
-      <script>window.history.go(-1)</script>
-    <%
+    response.setHeader ("refresh","5;URL=../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+monthnum+"&gameID="+ srGameId+"&times=1");
+
   }
 
   //GET DAY

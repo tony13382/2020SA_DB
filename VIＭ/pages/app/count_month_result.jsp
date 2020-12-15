@@ -187,7 +187,7 @@ try{
                     }
                 }
             }
-            reurl = "../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+monthnum+"&gameID="+ srGameId+"&times=1";
+            reurl = "../game_result.jsp?stu_id="+stu_id+"&name="+name+"&month="+(monthnum+1)+"&gameID="+ srGameId+"&times=1";
             response.setHeader ("refresh","0;URL="+reurl);
 			//關閉連線  
 			con.close();

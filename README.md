@@ -15,7 +15,7 @@
 - mode_modules/
   - bootstrap  **Front Package**
 
-## VIM
+## VIM(Main)
 >This Package Include the Function of Game
 
 - index.jsp  **Home Page ID:S1**

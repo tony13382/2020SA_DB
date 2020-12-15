@@ -18,10 +18,10 @@ mode_modules/
 ## VIM
 >This Package Include the Function of Game
 
--index.jsp  **Home Page ID:S1**
--stylesheets/  **Floder of CSS of PAGE (From BootStrap 4.3)**
--src/  **Floder of Image or Other Items**
--pages
+- index.jsp  **Home Page ID:S1**
+- stylesheets/  **Floder of CSS of PAGE (From BootStrap 4.3)**
+- src/  **Floder of Image or Other Items**
+- pages
   - game_ends.jsp **S5**
   - game_result.jsp **S3**
   - game_running.jsp **S4**

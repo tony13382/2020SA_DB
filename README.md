@@ -1,5 +1,6 @@
 # 2020SA_DB
 ## VIM(Front)
+>This Package Only Include HTML Front End 
 
 - index.html  **Home Page ID:S1**
 - stylesheets/  **Floder of CSS of PAGE (From BootStrap 4.3)**
@@ -16,6 +17,7 @@ mode_modules/
 
 ## VIM
 >This Package Include the Function of Game
+
 -index.jsp  **Home Page ID:S1**
 -stylesheets/  **Floder of CSS of PAGE (From BootStrap 4.3)**
 -src/  **Floder of Image or Other Items**

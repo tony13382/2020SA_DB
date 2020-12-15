@@ -21,8 +21,8 @@
   arrayDB = new String[4][4][2]; // 產生陣列
   for(int i=0;i<4;i++){
     for(int j=0;j<4;j++){
-      arrayDB[i][j][0]="55";
-      arrayDB[i][j][1]="10";
+      arrayDB[i][j][0]="";
+      arrayDB[i][j][1]="";
     }
   }
   if(monthnum==1){

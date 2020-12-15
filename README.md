@@ -35,3 +35,21 @@ mode_modules/
   
 ## SQL
 >The Database of this app
+
+EN
+| consult      | transcation   |
+|:------------:|:-------------:|
+| comparedate  | dayrunning    |
+| parameter    | gamelogin     |
+| producer     | monthparameter|
+| product      | monthresult   |
+| sellrecord   |               |
+
+ZH
+| 參考檔案      | 交易檔案      |
+|:------------:|:-------------:|
+| 第幾天推薦    | 每日營運      |
+| 參數         | 遊戲燈入檔     |
+| 廠商         | 每月參數       |
+| 產品         | 每月營運       |
+| 銷售紀錄     |               |

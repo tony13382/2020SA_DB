@@ -12,7 +12,7 @@
   
 packagelock.json  **nodejs Setup**
 mode_modules/
-  - bootstrap  **Front Package **
+  - bootstrap  **Front Package**
 
 ## VIM
 >This Package Include the Function of Game
@@ -25,13 +25,13 @@ mode_modules/
   - game_running.jsp **S4**
   - game_set.jsp **S2**
   - app/
-    - add_month_parameter.jsp **Connect From S4 **
-    - add_player.jsp **Connect From S1 Send to game_set**
-    - count_month_result.jsp **Connect From S4 Sent to S3**
+    - add_month_parameter.jsp **Connect From S4**
+    - add_player.jsp  **Connect From S1 Send to game_set**
+    - count_month_result.jsp  **Connect From S4 Sent to S3**
   
 packagelock.json  nodejs Setup
 mode_modules/
-  - bootstrap  **Front Package **
+  - bootstrap  **Front Package**
   
 ## SQL
 >The Database of this app

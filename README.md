@@ -37,6 +37,7 @@ mode_modules/
   
 ## SQL
 >The Database of this app
+>We Have TWO Database The following is the the DB and the table name that in the DB
 
 EN
 | consult      | transcation   |

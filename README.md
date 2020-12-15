@@ -11,8 +11,8 @@
   -  game_running.html **S4**
   -  game_set.html **S2**
   
-packagelock.json  **nodejs Setup**
-mode_modules/
+- packagelock.json  **nodejs Setup**
+- mode_modules/
   - bootstrap  **Front Package**
 
 ## VIM

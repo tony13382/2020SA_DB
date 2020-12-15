@@ -29,8 +29,8 @@ mode_modules/
     - add_player.jsp  **Connect From S1 Send to game_set**
     - count_month_result.jsp  **Connect From S4 Sent to S3**
   
-packagelock.json  nodejs Setup
-mode_modules/
+- packagelock.json  **nodejs Setup**
+- mode_modules/
   - bootstrap  **Front Package**
   
 ## SQL

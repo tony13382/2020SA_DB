@@ -298,7 +298,7 @@ try{
                       <div class="form-group">
                         <label for="title">幾天補一次貨</label>
                         <input type="number" class="form-control" id="set_S_CVV_Give" name="S_CVV_Give"
-                          placeholder="數量" value="<%=arrayDB[3][3][0]%>">
+                          placeholder="數量" value="<%=arrayDB[3][3][1]%>">
                       </div>
                       <button type="button" class="btn btn-primary" data-toggle="modal"
                         data-target="#Modal_S_CVV">檢視上月營運</button>

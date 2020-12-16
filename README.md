@@ -15,7 +15,7 @@
 - mode_modules/
   - bootstrap  **Front Package**
 
-## VIM
+## VIM(Main)
 >This Package Include the Function of Game
 
 - index.jsp  **Home Page ID:S1**
@@ -35,8 +35,8 @@
 - mode_modules/
   - bootstrap  **Front Package**
   
-## SQL
->The Database of this app.
+## VIM DB
+>The Database of this app. Use SQL File
 
 >We Have TWO Database.
 

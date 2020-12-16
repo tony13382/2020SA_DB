@@ -171,12 +171,12 @@ catch (ClassNotFoundException err) {
                   <div class="form-group">
                     <label for="show_stuid">學號</label>
                     <input required type="text" class="form-control" disabled id="show_stuid" name="stu_id"
-                      placeholder="Stu_ID" value="00000">
+                      placeholder="Stu_ID" value="<%=stu_id%>">
                   </div>
                   <div class="form-group">
                     <label for="show_name">姓名</label>
                     <input required type="text" class="form-control" disabled id="show_name" name="name"
-                      placeholder="Name" value="0000">
+                      placeholder="Name" value="<%=name%>">
                   </div>
                 </div>
                 <h1 class="text-center">恭喜完成挑戰</h1>

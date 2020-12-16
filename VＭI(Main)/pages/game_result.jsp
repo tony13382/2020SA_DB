@@ -87,7 +87,7 @@ try{
     <div class="mx-auto pt-3">
       <div class="row">
         <div class="col-md-3 col-12 pt-1">
-          <h1 class="text-center">VIM </h1>
+          <h1 class="text-center">VMI </h1>
           <hr>
           <div class="card mx-auto">
             <div class="card-body">

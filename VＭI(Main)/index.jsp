@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIM Game</title>
+  <title>VMI Game</title>
   <link rel="stylesheet" href="stylesheets/all.css">
   <link rel="stylesheet" href="stylesheets/mula.css">
 </head>
@@ -17,7 +17,7 @@
         <div class="col-12 col-md-9 col-lg-8">
           <div class="row">
             <div class="col-md-4 col-12 pt-1">
-              <h3 class="text-center">VIM </h3>
+              <h3 class="text-center">VMI </h3>
               <hr>
               <div class="card text-center mx-auto">
                 <div class="card-body">

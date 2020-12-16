@@ -1,5 +1,5 @@
 # 2020SA_DB
-## VIM(Front)
+## VMI(Front)
 >This Package Only Include HTML Front End 
 
 - index.html  **Home Page ID:S1**
@@ -15,7 +15,7 @@
 - mode_modules/
   - bootstrap  **Front Package**
 
-## VIM(Main)
+## VMI(Main)
 >This Package Include the Function of Game
 
 - index.jsp  **Home Page ID:S1**

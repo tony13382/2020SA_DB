@@ -201,7 +201,7 @@ CREATE TABLE `parameter` (
 
 LOCK TABLES `parameter` WRITE;
 /*!40000 ALTER TABLE `parameter` DISABLE KEYS */;
-INSERT INTO `parameter` VALUES ('dividendPercent','0.2'),('emergencyPrice','5000'),('rentPrice','5000'),('restockPrice','5000'),('serviceIncome','1000');
+INSERT INTO `parameter` VALUES ('dividendPercent','0.3'),('emergencyPrice','5000'),('rentPrice','5000'),('restockPrice','5000'),('serviceIncome','1000');
 /*!40000 ALTER TABLE `parameter` ENABLE KEYS */;
 UNLOCK TABLES;
 
